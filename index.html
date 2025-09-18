@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agriculture Dashboard</title>
+
+  <!-- Linking Google Fonts for styling -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #28a745;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 15px;
+      padding: 20px;
+      width: 280px;
+      text-align: center;
+    }
+
+    .card h3 {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .card .data {
+      font-size: 22px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+    }
+
+    footer {
+      background-color: #28a745;
+      text-align: center;
+      color: white;
+      padding: 10px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Agriculture Dashboard</h1>
+    <p>Real-time data and insights for modern agriculture</p>
+  </header>
+
+  <!-- Dashboard content -->
+  <div class="container">
+    <!-- Weather Information Card -->
+    <div class="card">
+      <h3>Current Weather</h3>
+      <p>Temperature</p>
+      <div class="data" id="weather-temperature">23°C</div>
+      <p>Humidity</p>
+      <div class="data" id="weather-humidity">65%</div>
+    </div>
+
+    <!-- Crop Status Card -->
+    <div class="card">
+      <h3>Crop Status</h3>
+      <p>Corn</p>
+      <div class="data" id="crop-status-corn">Healthy</div>
+      <p>Wheat</p>
+      <div class="data" id="crop-status-wheat">Moderate</div>
+    </div>
+
+    <!-- Irrigation Status Card -->
+    <div class="card">
+      <h3>Irrigation Status</h3>
+      <p>Water Level</p>
+      <div class="data" id="irrigation-water-level">80%</div>
+    </div>
+  </div>
+
+  <!-- Chart Section -->
+  <div class="chart-container" id="production-chart">
+    <canvas id="productionChart"></canvas>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Agriculture Dashboard</p>
+  </footer>
+
+  <!-- Adding JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Example weather data (could be fetched from an API)
+    const weatherData = {
+      temperature: '25°C',
+      humidity: '70%'
+    };
+    document.getElementById('weather-temperature').textContent = weatherData.temperature;
+    document.getElementById('weather-humidity').textContent = weatherData.humidity;
+
+    // Example crop status data
+    const cropData = {
+      corn: 'Healthy',
+      wheat: 'Moderate'
+    };
+    document.getElementById('crop-status-corn').textContent = cropData.corn;
+    document.getElementById('crop-status-wheat').textContent = cropData.wheat;
+
+    // Example irrigation data
+    const irrigationData = {
+      waterLevel: '75%'
+    };
+    document.getElementById('irrigation-water-level').textContent = irrigationData.waterLevel;
+
+    // Chart.js - Example Production Data over Time
+    const ctx = document.getElementById('productionChart').getContext('2d');
+    const productionChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [{
+          label: 'Crop Production (tons)',
+          data: [120, 150, 180, 170, 200],
+          borderColor: '#28a745',
+          fill: false,
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Months'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Production (tons)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
